@@ -32,10 +32,16 @@
                         return feature.properties.agency === "ab"; // Fires Originating in Alberta
                     },
                     style: function (feature) {
+                        var fillOpacity = 0.5;
+                        if (feature.properties.hectares < 1 || feature.properties.hectares === null) {
+                            fillOpacity = 0; // inside of the point transparent for hectares less than 1 or null
+                        } else if (feature.properties.hectares > 1000) {
+                            fillOpacity = 1; // inside of the circle opaque for hectares greater than 1000
+                        }
                         var options = {
                             color: '#FF0000',
                             weight: 2,
-                            fillOpacity: 0.5
+                            fillOpacity: fillOpacity
                         }
                         return options;
                     },
