@@ -28,6 +28,9 @@
             .then(response => response.json())
             .then(data => {
                 L.geoJSON(data.features, {
+                    filter: function(feature){
+                        return feature.properties.agency === "ab"; // Fires Originating in Alberta
+                    },
                     style: function (feature) {
                         var options = {
                             color: '#FF0000',
